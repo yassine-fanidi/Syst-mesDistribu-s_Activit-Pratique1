@@ -16,7 +16,7 @@ import java.util.Date;
 public class BankAccount {
     @Id
     private String id;
-    private Date creaatedAt;
+    private Date createdAt;
     private Double balance;
     private  String currency;
     @Enumerated(EnumType.STRING)
