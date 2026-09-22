@@ -36,7 +36,7 @@ public class AccountRestController {
         if (bankAccount.getBalance() != null) account.setBalance(bankAccount.getBalance());
         if (bankAccount.getCurrency() != null) account.setCurrency(bankAccount.getCurrency());
         if (bankAccount.getType() != null) account.setType(bankAccount.getType());
-        if (bankAccount.getCreaatedAt() != null) account.setCreaatedAt(new Date());
+        if (bankAccount.getCreatedAt() != null) account.setCreatedAt(new Date());
         return bankAccountRepository.save(account);
     }
     @DeleteMapping("/bankAccounts/{id}")
