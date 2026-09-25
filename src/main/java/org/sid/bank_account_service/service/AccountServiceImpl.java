@@ -6,6 +6,7 @@ import org.sid.bank_account_service.entities.BankAccount;
 import org.sid.bank_account_service.mappers.AccountMapper;
 import org.sid.bank_account_service.repositories.BankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,5 +34,21 @@ public class AccountServiceImpl implements AccountService {
         BankAccount savedBankAccount = bankAccountRepository.save(bankAccount);
         BankAccountResponseDTO bankAccountResponseDTO = accountMapper.fromBankAccount(savedBankAccount);
         return bankAccountResponseDTO;
+    }
+
+    public BankAccountResponseDTO updateAccount(String id, BankAccountRequestDTO bankAccountDTO) {
+        BankAccount account = BankAccount.builder()
+                .id(id)
+                .createdAt(new Date())
+                .currency(bankAccountDTO.getCurrency())
+                .balance(bankAccountDTO.getBalance())
+                .type(bankAccountDTO.getType())
+                .build();
+        return accountMapper.fromBankAccount(bankAccountRepository.save(account));
+    }
+
+    public Boolean deleteAccount(String id) {
+        bankAccountRepository.deleteById(id);
+        return true;
     }
 }
